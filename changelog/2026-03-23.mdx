@@ -1,0 +1,42 @@
+---
+title: "March 23, 2026"
+description: "Nurge v0.1.0 — first public release"
+---
+
+<Update label="2026-03-23" description="v0.1.0" tags={["Launch"]}>
+## Nurge v0.1.0
+
+Nurge is now available as a public release. Install it with a single command and start prospecting from Claude Code in under five minutes.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/usenurge/nurge/main/install.sh | bash
+```
+
+### New features
+
+- **Two-phase setup.** Run `nurge init` to connect Gmail and your CRM, then run `/nurge:setup` inside Claude Code for an AI-guided onboarding that classifies your emails, discovers your ICP, and generates 13 personalized skills.
+
+- **Send emails from Claude Code.** Use `nurge send` to compose and send outbound emails directly through your connected Gmail account — no context switching required.
+
+- **Context engine.** `nurge context generate` analyzes your sent email history and surfaces outbound patterns including subject lines, openers, send times, and reply rates.
+
+- **Conversation learning.** Nurge captures tone feedback, rejected drafts, and ICP refinements from every Claude Code session. Your skills get smarter over time without any extra effort.
+
+- **Skill versioning and rollback.** Every generated skill is versioned automatically. Roll back to a previous version with `nurge skills rollback` if a regeneration doesn't feel right.
+
+- **Health checks.** Run `nurge doctor` to verify your Gmail connection, database integrity, and configuration in one command.
+
+- **HubSpot connector.** Optionally connect HubSpot to enrich contacts, companies, and deals alongside your Gmail data.
+
+### Updates
+
+- **Cross-platform binaries.** Nurge ships pre-built binaries for macOS and Linux on both Intel and Apple Silicon. No compiler toolchain needed.
+
+- **Separate install channels.** Stable and pre-release versions use distinct install paths so you always get the right build.
+
+### Bug fixes
+
+- Fixed an issue where the setup wizard was not rendering in the TUI after initialization.
+- Fixed OAuth credential fallback so sync commands work reliably on first run.
+
+</Update>
