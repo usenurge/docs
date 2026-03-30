@@ -1,0 +1,57 @@
+---
+title: "March 30, 2026"
+description: "Outbound sequencer, reply drafting from Slack, enrichment engine, and connector hardening"
+---
+
+<Update label="2026-03-30" description="v0.2.0" tags={["Features", "Improvements"]}>
+## Outbound sequencer, reply drafting, and enrichment
+
+This week's release adds automated email sequences, server-side reply handling with Slack approvals, a contact enrichment engine, and significant connector reliability improvements.
+
+### New features
+
+- **Outbound sequencer.** Enroll prospects in multi-step email sequences with customizable templates, send windows, and daily caps. Pause, resume, or stop enrollments at any time. Nurge enforces a 2-mailbox limit during early access and includes seven guardrails to protect your sender reputation.
+
+- **Reply detection and draft generation.** Nurge now detects inbound replies server-side via Gmail push notifications. Replies are auto-classified (interested, out-of-office, unsubscribe, etc.) and AI-generated draft responses are created automatically. Active sequences pause when a prospect replies.
+
+- **Slack approvals for reply drafts.** Connect Slack to receive reply draft notifications with **Approve**, **Edit**, and **Skip** buttons. Approved replies send directly from your connected Gmail — no context switching needed.
+
+- **Enrichment engine.** Use `nurge enrich` to look up contacts and companies, save enrichment data, and search your local database with filters like `--company`, `--past-company`, `--title`, and `--domain`. Enrichment results feed into research dossiers that inform your outbound drafts.
+
+- **Website scraper.** Run `nurge scrape <url>` to extract clean, context-efficient website content for use during setup and research.
+
+- **Auto-classify emails.** `nurge emails classify-auto` applies heuristic rules (internal, transactional, newsletter) before AI classification, cutting setup time.
+
+- **Self-update.** Nurge checks for new versions on session start and applies updates automatically. You can also run `nurge update` manually.
+
+- **Connector health verification.** Run `nurge connectors verify` to check that your Gmail, HubSpot, or Slack connections are healthy and tokens are valid.
+
+- **Slack connector.** Connect a Slack workspace to receive reply draft notifications and approve outbound messages without leaving your workflow.
+
+- **Analytics and pipeline commands.** New CLI commands for viewing outbound analytics, managing your pipeline, and running research workflows.
+
+### Updates
+
+- **Direct Gmail sending.** Outbound emails now send through the Gmail API directly instead of a third-party proxy — faster delivery, no extra cost.
+
+- **Stronger OAuth security.** All connector OAuth flows now use PKCE and cryptographically random CSRF tokens to prevent authorization code interception.
+
+- **Connector `--force` flag.** Reconnect an already-connected service by passing `--force` to `nurge connect`. Nurge now warns before overwriting an existing connection.
+
+- **OAuth scope tracking.** Granted scopes are saved during connection so future upgrades can detect when re-authorization is needed.
+
+- **Faster setup.** The setup wizard now generates five core skills immediately and defers the remaining skills until first use, cutting initial setup time significantly.
+
+- **Improved error messages.** Auth failures during sync and send now surface actionable guidance (e.g., "run `nurge connect gmail --force` to re-authenticate").
+
+### Bug fixes
+
+- Fixed installer failing to download the correct binary due to a missing version in the filename.
+- Fixed `nurge sync` reporting "Already up to date" after disconnecting and reconnecting Gmail.
+- Fixed a race condition where two terminals running `nurge connect` simultaneously caused conflicts.
+- Fixed config file corruption on crash by switching to atomic writes.
+- Fixed `nurge doctor` incorrectly reporting missing tokens for server-backed connectors like Gmail.
+- Fixed email classification false positives for short words like "yes" by enforcing word-boundary matching.
+- Fixed installer output leaking into version detection when run via command substitution.
+
+</Update>
